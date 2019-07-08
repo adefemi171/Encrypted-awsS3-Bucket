@@ -6,12 +6,16 @@ pipeline{
         BUILD_HOME='/home/potus/.jenkins/workspace'
     }
     agent any
-    node {
-        stage('build'){
-            echo "building"
-        }
-    }
+   // node {
+   //     stage('build'){
+   //         echo "building"
+    //    }
+   // }
     stages{
+    
+        stage('build'){
+            echo 'building'
+        }
 
         stage('Terraform Version'){
             sh 'terraform --version'
