@@ -1,0 +1,35 @@
+
+pipeline{
+    environment{
+        BUILD_SCRIPTS_GIT="https://github.com/adefemi171/Encrypted-awsS3-Bucket.git"
+        BUILD_SCRIPTS='mypipeline'
+        BUILD_HOME='/home/potus/.jenkins/workspace'
+    }
+    agent any
+    node {
+        stage('build'){
+            echo "building"
+        }
+    }
+    stages{
+
+        stage('Terraform Version'){
+            sh 'terraform --version'
+        }
+        stage ('Provision infrastructure'){
+            steps ('dev'){
+                sh 'terraform init -upgrade=true'
+                sh 'terraform plan -out=plan'
+            }
+        }
+        stage('Deploy approval'){
+            input "Deploy to prod?"
+        }
+        stage ('Deploy to Production'){
+            ech "Deploying"
+            sh 'terraform apply plan'
+        }
+
+    }
+
+}
