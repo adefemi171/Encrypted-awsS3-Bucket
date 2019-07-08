@@ -14,24 +14,24 @@ pipeline{
     stages{
     
         stage('build'){
-            echo 'building'
+            echo "building"
         }
 
         stage('Terraform Version'){
-            sh 'terraform --version'
+            sh "terraform --version"
         }
         stage ('Provision infrastructure'){
             steps ('dev'){
-                sh 'terraform init -upgrade=true'
-                sh 'terraform plan -out=plan'
+                sh "terraform init -upgrade=true"
+                sh "terraform plan -out=plan"
             }
         }
         stage('Deploy approval'){
             input "Deploy to prod?"
         }
         stage ('Deploy to Production'){
-            ech "Deploying"
-            sh 'terraform apply plan'
+            echo "Deploying"
+            sh "terraform apply plan"
         }
 
     }
