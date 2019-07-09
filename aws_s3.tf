@@ -1,6 +1,6 @@
 // Creating a Terraform Template
 // tpl: Template file format
-data "template_file" "encrypted_bucket_s3"{
+data "template_file" "encrypted_bucket_s_three"{
     template = "${file("s3_bucket.json.tpl")}"
     vars {
         encrypted_bucket         = "${aws_s3_bucket.encrypted_bucket.bucket}"
@@ -49,9 +49,9 @@ resource "aws_s3_bucket_object" "encrypted_bucket_object" {
 // Creating an IAM Policy
 //     policy = "${data.template_file.cloud-trail-logs-s3-readonly.rendered}"
 
-resource "aws_iam_policy" "encrypted-bucket-s3" {
-    name                    = "encrypted-s3-policy"
+resource "aws_iam_policy" "encrypted-bucket-s-three" {
+    name                    = "encrypted-s-three-policy"
     path                    = "/"
     description             = "Acess to Encypted S3 Buckets"
-    policy                  = "${data.template_file.encrypted_bucket_s3.rendered}"
+    policy                  = "${data.template_file.encrypted_bucket_s_three.rendered}"
 }
